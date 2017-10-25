@@ -20,16 +20,23 @@
     echo "Question $i: <input type='text' name = 'questions[{$_SESSION['i']}]['question']' maxlength ='140' /><br />";
     for($j=0;$j<4;$j++) {
       $n = $j + 1;
-      echo "Answer $n: <input type='text' name = 'questions[{$_SESSION['i']}]['options']' maxlength ='50' /><br />";
+      echo "Option $n: <input type='text' name = 'questions[{$_SESSION['i']}]['options']' maxlength ='50' /><br />";
     }
 
       echo "<input type='submit' value='Question Submit' /><br />";
     }
 
      ?>
+     <br />
+     <br />
   </form>
-  <form method ="POST" action="Quiz.php">
-  <?php echo "<input type='submit' value='Final Submit' />"; ?>
+  <form method ="POST" action="quiz.php">
+  <?php
+  for($j=0;$j<4;$j++) {
+    $n = $j + 1;
+    echo "Final Answer $n: <input type='text' name = 'answers[]' maxlength ='50' /><br />";
+  }
+  echo "<input type='submit' value='Final Submit' />"; ?>
   </form>
 
   </body>
