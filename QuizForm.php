@@ -57,17 +57,23 @@
       }
       if($_SESSION['i'] != 0) {
         $index = $_SESSION['i'] - 1;
-        $array = array($_POST[$index]['question'],$_POST[$index]['option'][0],$_POST[$index]['option'][1],$_POST[$index]['option'][2],$_POST[$index]['option'][3]);
+        $array = array($_POST['questions'][$index]['question']);
+        array_push($array, $_POST['questions'][$index]['option'][0]);
+        array_push($array, $_POST['questions'][$index]['option'][1]);
+        array_push($array, $_POST['questions'][$index]['option'][2]);
+        array_push($array, $_POST['questions'][$index]['option'][3]);
         fputcsv($out, $array, '|');
 
         fclose($out);
       }
       $i = $_SESSION['i'] + 1;
+      $question = 'question';
+      $option = 'option';
       echo "<div class = 'container'><table> <tr><td>";
-      echo "Question $i:</td><td><input type='text' name = 'questions[{$_SESSION['i']}]['question']' maxlength ='140' /></td></tr>";
+      echo "Question $i:</td><td><input type='text' name = 'questions[{$_SESSION['i']}][$question]' maxlength ='140' /></td></tr>";
       for($j=0;$j<4;$j++) {
         $n = $j + 1;
-        echo "<tr><td>Option $n: </td><td><input type='text' name = 'questions[{$_SESSION['i']}]['option'][$j]' maxlength ='50' /></td></tr>";
+        echo "<tr><td>Option $n: </td><td><input type='text' name = 'questions[{$_SESSION['i']}][$option][$j]' maxlength ='50' /></td></tr>";
       } if($_SESSION['i'] == 9) {
         echo "<tr><td colspan = '2'><input type='submit' class='btn btn-default' value='Final Question Submit' /></td></tr></table></div>";
       } else {
