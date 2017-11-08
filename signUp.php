@@ -44,6 +44,8 @@
           $file = fopen("usernames.csv","a");
           fputcsv($file,$list);
           fclose($file);
+          $uname = $_POST['cuname'] + '.csv';
+          $user = fopen($uname,'x');
           header('Location:./home.php');
         }
       }
