@@ -50,24 +50,26 @@
     <?php
     session_start();
 
-    if(!isset($_SESSION['i'])) {
+    if(!isset($_SESSION['i']) || (!isset($_POST['name']) && !isset($_SESSION['name']))) {
       $_SESSION['i'] = 0;
       echo "<div class = 'container'><table> <tr><td>";
-      echo "What is your quiz named? </td><td><input type = 'text' name ='name' maxlength='140' /> </td></tr>";
+      echo "What is your quiz named? </td><td><input type = 'text' name ='name' maxlength='140' required/> </td></tr>";
+      echo "<tr><td>Quiz Description: </td><td><input type = 'text' name ='desc' maxlength='250' required/> </td></tr>";
       for($j=0;$j<4;$j++) {
         $n = $j + 1;
-        echo "<tr><td>Final Answer $n: </td><td><input type='text' name = 'answer[$j]' maxlength ='50' /></td></tr>";
+        echo "<tr><td>Final Answer $n: </td><td><input type='text' name = 'answer[$j]' maxlength ='50' required/></td></tr>";
       }
       echo "<tr><td colspan = '2'><input type='submit' class='btn btn-default' value='Name Submit' /></td></tr></table></div>";
     }else {
       if($_SESSION['i'] >= 10 || isset($_POST['done'])) {
-        exit();
+        session_destroy();
+        header('Location:./quiz.php');
       }
       if(!isset($_SESSION['name'])) {
         $_SESSION['name'] = $_POST['name'];
         $name = $_SESSION['name'] . '.csv';
         $out = fopen($name,'x');
-        fputcsv($out,array($_SESSION['name'],$_POST['answer'][0],$_POST['answer'][1],$_POST['answer'][2],$_POST['answer'][3]), '|');
+        fputcsv($out,array($_SESSION['name'],$_POST['desc'],$_POST['answer'][0],$_POST['answer'][1],$_POST['answer'][2],$_POST['answer'][3]), '|');
         fclose($out);
       } else {
         $name = $_SESSION['name'] . '.csv';
@@ -88,17 +90,16 @@
       $question = 'question';
       $option = 'option';
       echo "<div class = 'container'><table> <tr><td>";
-      echo "Question $i:</td><td><input type='text' name = 'questions[{$_SESSION['i']}][$question]' maxlength ='140' /></td></tr>";
+      echo "Question $i:</td><td><input type='text' name = 'questions[{$_SESSION['i']}][$question]' maxlength ='140' required/></td></tr>";
       for($j=0;$j<4;$j++) {
         $n = $j + 1;
-        echo "<tr><td>Option $n: </td><td><input type='text' name = 'questions[{$_SESSION['i']}][$option][$j]' maxlength ='50' /></td></tr>";
+        echo "<tr><td>Option $n: </td><td><input type='text' name = 'questions[{$_SESSION['i']}][$option][$j]' maxlength ='50' required/></td></tr>";
       } if($_SESSION['i'] == 9) {
         echo "<tr><td colspan = '2'><input type='submit' class='btn btn-default' value='Final Question Submit' /></td></tr></table></div>";
       } else {
-        echo "<tr><td colspan = '2'><input type='submit' class='btn btn-default' value='Question Submit' /></td></tr><tr><td colspan = '2'><input type='submit' class='btn btn-default' value='Done' name='done' /></td></tr></table></div>";
+        echo "<tr><td colspan = '2'><input type='submit' class='btn btn-default' value='Question Submit' /></td></tr><tr><td colspan = '2'><input type='submit' class='btn btn-default' value='Final Submit' name='done' /></td></tr></table></div>";
       }
       $_SESSION['i'] = $_SESSION['i'] + 1;
-
     }
     ?>
   </form>
