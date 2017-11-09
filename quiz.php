@@ -114,6 +114,7 @@ function readCSV($filename)
     $fp = fopen($username, "a");
     $output = array($_SESSION["data"]["quizzes"]["name"], "dude is a gorilla");
     fputcsv($fp,$output, "|");
+    session_unset();
   }
   else
   {
