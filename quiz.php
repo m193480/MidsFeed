@@ -76,7 +76,7 @@ function readCSV($filename)
   if(isset($_POST['quizid']))
   {
     echo $_POST['quizid'];
-    $_SESSION['FILE'] = $_POST['quizid'];
+    $_SESSION['FILE'] = $_POST['quizid'] . ".csv";
   }
   if(isset($_POST['newquiz']))
   {
