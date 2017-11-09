@@ -3,10 +3,7 @@
 <?php
   require_once("navbar.php");
 ?>
-<style type="text/css">
-body {
-    padding-top: 65px;
-}
+
 </style>
 <?php
 /*
@@ -78,6 +75,7 @@ function readCSV($filename)
   }
   if(isset($_POST['quizid']))
   {
+    echo $_POST['quizid'];
     $_SESSION['FILE'] = $_POST['quizid'];
   }
   if(isset($_POST['newquiz']))
@@ -92,21 +90,33 @@ function readCSV($filename)
     echo "<form method='POST' action='?'>";
     echo "<div class='form-group'>
       <label for='quiz'>Enter name of quiz:</label>";
-    echo "<input type='text' class='form-control' name='quiTake Quizzid' id='quiz'></div>";
-    echo "<input type=submit name='FILE' value='Take Quiz!'>";
+    echo "<input type='text' class='form-control' name='quizid' id='quiz'></div>";
+    echo "<input type=submit name='FILE' value='Take Quiz!' class='btn btn-primary'>";
     echo "</form>";
   }
   else if(isset($_SESSION["FILE"]) && !isset($_SESSION["questionProgress"]))
   {
     $_SESSION["data"] = readCSV($_SESSION["FILE"]);
     $_SESSION["questionProgress"] = 0;
+    $_SESSION["points"] = 0;
+  }
+  if(isset($_POST))
+  {
+    for($i = 0; $i < 10; $i++)
+    {
+      if(isset($_POST[$i]))
+      {
+        $_SESSION["points"] += $_POST[$i];
+      }
+    }
   }
   if(isset($_SESSION["questionProgress"]) && $_SESSION["questionProgress"] >= sizeof($_SESSION["data"]["quizzes"]["questions"]))
   {
     echo "<div class='jumbotron'>";
     echo "<h2 class='display-3'>Based on your answers, you are a gorilla.</h2>";
     echo "</div>";
-    file_put_contents($_SESSION['FILE'], "Sean Krasovic, dude is a gorilla", FILE_APPEND | LOCK_EX);
+    $username = $_COOKIE['uname'] . ".csv";
+    file_put_contents($username, "Sean Krasovic, dude is a gorilla", FILE_APPEND | LOCK_EX);
   }
   else
   {
@@ -132,13 +142,15 @@ function readCSV($filename)
     echo "</p><p class='lead'>";
     echo "Here are your options:";
     echo "</p>";
+    $j = 0;
     foreach($quizData["questions"][$questionNumber]["options"] as $key => $option)
     {
-      echo "<input type='radio' name='{$quizData["questions"][$questionNumber]["question"]}' value='$option'> $option";
+      echo "<input type='radio' name='$questionNumber' value='$j'> $option";
       echo "<br>";
+      $j++;
     }
     echo "</select></div>";
-    echo "<input type=submit value='Submit Answer'>";
+    echo "<input type=submit value='Submit Answer' class='btn btn-primary'>";
   echo "</form></div>";
   $_SESSION["questionProgress"]++;
   }
@@ -148,11 +160,11 @@ function readCSV($filename)
   echo"<div class='form-group'>
   <form method='POST' action='?'>
     <label for='unsset'>Restart Quiz Progress:</label>
-    <input type='submit' name='unsset' value='RESTART'>
+    <input type='submit' name='unsset' value='RESTART' class='btn btn-primary'>
   </form></div>";
   echo"<div class='form-group'><form method='POST' action='?'>
     <label for='newquiz'>New Quiz:</label>
-    <input type='submit' name='newquiz' value='Enter Quiz Name'>
+    <input type='submit' name='newquiz' value='Enter Quiz Name' class='btn btn-primary'>
   </form></div>";
   }
 
