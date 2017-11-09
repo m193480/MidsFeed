@@ -1,9 +1,13 @@
 <html>
 
 <?php
-require_once("navbar.php");
+  require_once("navbar.php");
 ?>
-
+<style type="text/css">
+body {
+    padding-top: 65px;
+}
+</style>
 <?php
 /*
 
@@ -18,89 +22,108 @@ Current functionality: Read a given quiz from a file and write to the current us
  * containing the name, answers, questions, and options for each user created quiz.
  */
 function readCSV($filename)
-{
-    if ($fp = fopen("$filename", 'r')) {
+  {
+    if($fp = fopen("$filename", 'r'))
+      {
         $questionNumber = 0;
-        $linenumber     = 0;
-        while ($line = fgetcsv($fp, 0, "|")) {
-            if ($linenumber == 0) {
+        $linenumber = 0;
+        while($line = fgetcsv($fp, 0, "|"))
+          {
+            if($linenumber == 0)
+              {
                 $data["quizzes"]["name"] = $line[0];
                 $data["quizzes"]["desc"] = $line[1];
-                $j                       = 2;
-                for ($i = 0; $i < 4; $i++) {
-                    $data["quizzes"]["answers"][$i] = $line[$j];
-                    $j++;
+                $j = 2;
+                for($i = 0; $i < 4; $i++)
+                {
+                  $data["quizzes"]["answers"][$i] = $line[$j];
+                  $j++;
                 }
-            } else {
+              }
+              else {
                 $len = sizeof($line);
-                $j   = 0;
-                while ($j < $len) {
-                    $data["quizzes"]["questions"][$questionNumber]["question"] = $line[$j];
+                $j = 0;
+                while($j < $len)
+                {
+                  $data["quizzes"]["questions"][$questionNumber]["question"] = $line[$j];
+                  $j++;
+                  for($i = 0; $i < 4; $i++)
+                  {
+                    $data["quizzes"]["questions"][$questionNumber]["options"][$i] = $line[$j];
                     $j++;
-                    for ($i = 0; $i < 4; $i++) {
-                        $data["quizzes"]["questions"][$questionNumber]["options"][$i] = $line[$j];
-                        $j++;
-                    }
-                    $questionNumber++;
+                  }
+                  $questionNumber++;
                 }
-            }
-            $linenumber++;
-        }
-    } else {
+              }
+              $linenumber++;
+          }
+      }
+      else
+      {
         echo "invalid input file: Blame Sean Krasovic.";
-        echo "<div class='form-group'><form method='POST' action='?'>
+          echo"<div class='form-group'><form method='POST' action='?'>
     <label for='newquiz'>New Quiz:</label>
     <input type='submit' name='newquiz' value='Enter Quiz Name'>
   </form></div>";
         exit(1);
-    }
-    return $data;
-}
-session_start();
-if (isset($_POST['unsset'])) {
+      }
+      return $data;
+  }
+  session_start();
+  if(isset($_POST['unsset']))
+  {
     $saveValue = $_SESSION['FILE'];
     session_unset();
     $_SESSION['FILE'] = $saveValue;
-}
-if (isset($_POST['quizid'])) {
+  }
+  if(isset($_POST['quizid']))
+  {
     $_SESSION['FILE'] = $_POST['quizid'];
-}
-if (isset($_POST['newquiz'])) {
+  }
+  if(isset($_POST['newquiz']))
+  {
     session_unset();
-}
-?>
+  }
+  ?>
 
 <?php
-if (!isset($_SESSION["FILE"])) {
+  if(!isset($_SESSION["FILE"]))
+  {
     echo "<form method='POST' action='?'>";
     echo "<div class='form-group'>
       <label for='quiz'>Enter name of quiz:</label>";
-    echo "<input type='text' class='form-control' name='quizid' id='quiz'></div>";
+    echo "<input type='text' class='form-control' name='quiTake Quizzid' id='quiz'></div>";
     echo "<input type=submit name='FILE' value='Take Quiz!'>";
     echo "</form>";
-} else if (isset($_SESSION["FILE"]) && !isset($_SESSION["questionProgress"])) {
-    $_SESSION["data"]             = readCSV($_SESSION["FILE"]);
+  }
+  else if(isset($_SESSION["FILE"]) && !isset($_SESSION["questionProgress"]))
+  {
+    $_SESSION["data"] = readCSV($_SESSION["FILE"]);
     $_SESSION["questionProgress"] = 0;
-}
-if (isset($_SESSION["questionProgress"]) && $_SESSION["questionProgress"] >= sizeof($_SESSION["data"]["quizzes"]["questions"])) {
+  }
+  if(isset($_SESSION["questionProgress"]) && $_SESSION["questionProgress"] >= sizeof($_SESSION["data"]["quizzes"]["questions"]))
+  {
     echo "<div class='jumbotron'>";
     echo "<h2 class='display-3'>Based on your answers, you are a gorilla.</h2>";
     echo "</div>";
     file_put_contents($_SESSION['FILE'], "Sean Krasovic, dude is a gorilla", FILE_APPEND | LOCK_EX);
-} else {
+  }
+  else
+  {
     $quizData = $_SESSION["data"]["quizzes"];
-}
-?>
+  }
+  ?>
 
   <form method="POST" action="?">
 
   <?php
-if (isset($quizData)) {
+  if(isset($quizData))
+  {
     echo "<div class='text-center'>";
     echo "<div class='jumbotron'><h1 class='display-3'>";
     echo $quizData["name"];
     echo "</h1>";
-    echo "<h2 class='display-2'>";
+    echo "<h2 class='display-4'>";
     echo $quizData['desc'];
     echo "</h2> <hr class='my-4'";
     $questionNumber = $_SESSION["questionProgress"];
@@ -109,34 +132,35 @@ if (isset($quizData)) {
     echo "</p><p class='lead'>";
     echo "Here are your options:";
     echo "</p>";
-    foreach ($quizData["questions"][$questionNumber]["options"] as $key => $option) {
-        echo "<input type='radio' name='{$quizData["questions"][$questionNumber]["question"]}' value='$option'> $option";
-        echo "<br>";
+    foreach($quizData["questions"][$questionNumber]["options"] as $key => $option)
+    {
+      echo "<input type='radio' name='{$quizData["questions"][$questionNumber]["question"]}' value='$option'> $option";
+      echo "<br>";
     }
     echo "</select></div>";
     echo "<input type=submit value='Submit Answer'>";
-    echo "</form></div>";
-    $_SESSION["questionProgress"]++;
-}
+  echo "</form></div>";
+  $_SESSION["questionProgress"]++;
+  }
 
-if (isset($_SESSION['FILE'])) {
-    echo "<div class='form-group'>
+  if(isset($_SESSION['FILE']))
+  {
+  echo"<div class='form-group'>
   <form method='POST' action='?'>
     <label for='unsset'>Restart Quiz Progress:</label>
     <input type='submit' name='unsset' value='RESTART'>
   </form></div>";
-    echo "<div class='form-group'><form method='POST' action='?'>
+  echo"<div class='form-group'><form method='POST' action='?'>
     <label for='newquiz'>New Quiz:</label>
     <input type='submit' name='newquiz' value='Enter Quiz Name'>
   </form></div>";
-}
+  }
 
-?>
+  ?>
 
-<?php
-/*
-echo "<pre>";
-print_r($_SESSION["data"]);
-echo "</pre>"; */
+<?php /*
+    echo "<pre>";
+    print_r($_SESSION["data"]);
+    echo "</pre>"; */
 ?>
 </html>
