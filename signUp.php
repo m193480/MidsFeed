@@ -52,8 +52,8 @@ require_once("navbar.php");
           fclose($user);
           $expires = time() + 86400;
           setcookie("uname", $_POST['cuname'], $expires);
-          echo $_COOKIE['uname'];
-          //header('Location:./index.html');
+
+          header('Location:./index.php');
         }
       }
       ?>

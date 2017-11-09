@@ -7,14 +7,8 @@
 </style>
 <?php
 /*
-
-
 Current functionality: Read a given quiz from a file and write to the current user's .csv file storing quiz results.
-
-
-
 */
-
 /* reads in a CSV file containing user created quizzes.  Returns an associative array
  * containing the name, answers, questions, and options for each user created quiz.
  */
@@ -87,12 +81,13 @@ function readCSV($filename)
 <?php
   if(!isset($_SESSION["FILE"]))
   {
-    echo "<form method='POST' action='?'>";
+    echo "<div class='container'>
+    <form method='POST' action='?'>";
     echo "<div class='form-group'>
       <label for='quiz'>Enter name of quiz:</label>";
     echo "<input type='text' class='form-control' name='quizid' id='quiz'></div>";
     echo "<input type=submit name='FILE' value='Take Quiz!' class='btn btn-primary'>";
-    echo "</form>";
+    echo "</form></div>";
   }
   else if(isset($_SESSION["FILE"]) && !isset($_SESSION["questionProgress"]))
   {
@@ -117,7 +112,8 @@ function readCSV($filename)
     echo "</div>";
     $username = $_COOKIE['uname'] . ".csv";
     $fp = fopen($username, "a");
-    fputcsv($fp,"Sean Krasovic, dude is a gorilla");
+    $output = array($_SESSION["data"]["quizzes"]["name"], "dude is a gorilla");
+    fputcsv($fp,$output, "|");
   }
   else
   {
@@ -155,7 +151,6 @@ function readCSV($filename)
   echo "</form></div>";
   $_SESSION["questionProgress"]++;
   }
-
   if(isset($_SESSION['FILE']))
   {
   echo"<div class='form-group'>
@@ -168,8 +163,14 @@ function readCSV($filename)
     <input type='submit' name='newquiz' value='Enter Quiz Name' class='btn btn-primary'>
   </form></div>";
   }
-
   ?>
+
+  <footer class="py-5 bg-dark">
+<div class="container">
+	<p class="m-0 text-center text-white">Copyright &copy; Collective Effort Without Sean Krasovic 2017</p>
+</div>
+<!-- /.container -->
+</footer>
 
 <?php /*
     echo "<pre>";
