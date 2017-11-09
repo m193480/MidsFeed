@@ -74,20 +74,21 @@ Search Quiz -> quiz.php
 	</div>
 </div>
 <?php
+$file = $uname . ".csv";
+while($quiz = fgetcsv($file, '|')){
 echo "
 <div class='row'>
 	<div class='col-md-12'>
 		<h1> Quiz Results </h1>
 	</div>
-</div>";
-echo "
+</div>
 <div class='row'>
 	<div class='col-md-12'>
-		<h3> Quiz:";
-		?>Quiz Name</h3>
-		<p> These are the quiz results </p>
+		<h3> Quiz: $quiz[0]</h3>
+		<p> Results: $quiz[1] </p>
 	</div>
-</div>
+</div>";
+}
 
 
 
