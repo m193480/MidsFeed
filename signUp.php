@@ -30,7 +30,7 @@
       <?php
       $cuname = $_POST['cuname'];
       $cpsw = $_POST['cpsw'];
-      $list = array("$cuname,$cpsw");
+      $list = array($cuname,$cpsw);
       ?>
       <br />
       <button type="submit" class="btn btn-primary" onclick="validate()">Sign up!</button>
@@ -42,11 +42,12 @@
       if(isset($_POST['cuname']) && isset($_POST['cpsw'])){
         if($_POST['cuname'] != '' && $_POST['cpsw'] != '' ) {
           $file = fopen("usernames.csv","a");
-          fputcsv($file,$list);
+          fputcsv($file,$list,'|');
           fclose($file);
-          $uname = $_POST['cuname'] + '.csv';
-          $user = fopen($uname,'x');
-          header('Location:./home.php');
+          $name = $_POST['cuname'] . '.csv';
+          $user = fopen($name,'x');
+          fclose($user);
+          header('Location:./index.html');
         }
       }
       ?>
