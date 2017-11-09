@@ -116,7 +116,8 @@ function readCSV($filename)
     echo "<h2 class='display-3'>Based on your answers, you are a gorilla.</h2>";
     echo "</div>";
     $username = $_COOKIE['uname'] . ".csv";
-    file_put_contents($username, "Sean Krasovic, dude is a gorilla", FILE_APPEND | LOCK_EX);
+    $fp = fopen($username, "a");
+    fputcsv($fp,"Sean Krasovic, dude is a gorilla");
   }
   else
   {
