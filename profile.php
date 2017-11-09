@@ -19,26 +19,11 @@
 	</head>
 
 	<body>
-<script type="text/javascript">
-	var uname = "uname";
-	function getCookie(uname) {
-		var name = cname + "=";
-		var decodedCookie = decodeURIComponent(document.cookie);
-		var ca = decodedCookie.split(';');
-		for(var i = 0; i <ca.length; i++) {
-			var c = ca[i];
-			while (c.charAt(0) == ' ') {
-				c = c.substring(1);
-			}
-			if (c.indexOf(name) == 0) {
-				return c.substring(name.length, c.length);
-			}
-		}
-		return null;
-	}
-	var name = getCookie(uname);
-</script>
-
+<?php
+if(isset($_COOKIE['uname'])){
+	$uname = $_COOKIE['uname'];
+}
+?>
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 	<div class="container">
@@ -82,9 +67,9 @@ Search Quiz -> quiz.php
 	</div>
 	<div class="col-md-10">
 		<h1 class=":my-2">
-			<script type="text/javascript">
-				document.write(name);
-			</script>
+			<?php
+				echo $uname;
+			?>
 		</h1>
 	</div>
 </div>
