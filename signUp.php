@@ -18,29 +18,7 @@
 require_once("navbar.php");
 ?>
   <body>
-    <script type="text/javascript">
-    function setCookie(cname, cvalue, exdays) {
-      var d = new Date();
-      d.setTime(d.getTime() + (exdays*24*60*60*1000));
-      var expires = "expires="+ d.toUTCString();
-      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    }
-    function getCookie(cname) {
-      var name = cname + "=";
-      var decodedCookie = decodeURIComponent(document.cookie);
-      var ca = decodedCookie.split(';');
-      for(var i = 0; i <ca.length; i+skraso,lol+) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-          c = c.substring(1);
-        }skraso,lol
-        if (c.indexOf(name) == 0) {
-          return c.substring(name.length, c.length);
-        }
-      }
-      return null;
-    }
-    </script>
+
     <center><h1>MidsFeed Sign Up</h1></center>
 
     <form method='post' action='?'>
@@ -72,8 +50,10 @@ require_once("navbar.php");
           $name = $_POST['cuname'] . '.csv';
           $user = fopen($name,'x');
           fclose($user);
-          echo "<script type='text/javascript'>setCookie('uname',{$_POST['cuname']}, 9000);</script>";
-          header('Location:./index.html');
+          $expires = time() + 86400;
+          setcookie("uname", $_POST['cuname'], $expires);
+          echo $_COOKIE['uname'];
+          //header('Location:./index.html');
         }
       }
       ?>
