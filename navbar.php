@@ -1,3 +1,9 @@
+<style type="text/css">
+body {
+    padding-top: 65px;
+}
+</style>
+
 <?php
 echo   "
   <!-- Bootstrap core CSS -->
