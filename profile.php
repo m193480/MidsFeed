@@ -25,38 +25,9 @@ if(isset($_COOKIE['uname'])){
 }
 ?>
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-	<div class="container">
-		<a class="navbar-brand" href="index.html">MidsFeed</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active">
-						<a class="nav-link" href="index.html">Home
-							<span class="sr-only">(current)</span>
-						</a>
-					</li>
-<!-- things we need:
-Login drop down with sign up option
-Profile page
-Create Quiz -> QuizForm.php
-Search Quiz -> quiz.php
--->
-			<li class="nav-item">
-				<a class="nav-link" href="profile.php">Profile</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">Services</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">Contact</a>
-			</li>
-			</ul>
-			</div>
-		</div>
-	</nav>
+<?php
+require_once("navbar.php");
+?>
 
 <!-- Page Content -->
 <div class="container">
@@ -75,7 +46,8 @@ Search Quiz -> quiz.php
 </div>
 <?php
 $file = $uname . ".csv";
-while($quiz = fgetcsv($file, '|')){
+$fp = fopen($file,"r");
+while($quiz = fgetcsv($fp,0,'|')){
 echo "
 <div class='row'>
 	<div class='col-md-12'>
@@ -88,10 +60,7 @@ echo "
 		<p> Results: $quiz[1] </p>
 	</div>
 </div>";
-}
-
-
-
+} ?>
 <!-- Footer -->
 <footer class="py-5 bg-dark">
 <div class="container">
@@ -99,11 +68,8 @@ echo "
 </div>
 <!-- /.container -->
 </footer>
-
 <!-- Bootstrap core JavaScript -->
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
 </body>
-
 </html>

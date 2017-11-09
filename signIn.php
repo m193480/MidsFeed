@@ -38,8 +38,7 @@ if(isset($_POST['uname']) && $_POST['uname'] != '') {
   if(strcmp($pwd[$i], $psw) == 0) {
     $expires = time() + 86400;
     setcookie("uname", $uname, $expires);
-    echo $_COOKIE['uname'];
-    //header('Location:./index.html');
+    header('Location:./index.php');
   }
   else {
     echo "<div class='text-center'><div class='jumbotron'><h1 class='display-2'>Incorrect Password.</h1></div></div>";

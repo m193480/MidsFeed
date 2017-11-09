@@ -7,14 +7,8 @@
 </style>
 <?php
 /*
-
-
 Current functionality: Read a given quiz from a file and write to the current user's .csv file storing quiz results.
-
-
-
 */
-
 /* reads in a CSV file containing user created quizzes.  Returns an associative array
  * containing the name, answers, questions, and options for each user created quiz.
  */
@@ -117,7 +111,8 @@ function readCSV($filename)
     echo "</div>";
     $username = $_COOKIE['uname'] . ".csv";
     $fp = fopen($username, "a");
-    fputcsv($fp,"Sean Krasovic, dude is a gorilla");
+    $output = array($_SESSION["data"]["quizzes"]["name"], "dude is a gorilla");
+    fputcsv($fp,$output, "|");
   }
   else
   {
@@ -155,7 +150,6 @@ function readCSV($filename)
   echo "</form></div>";
   $_SESSION["questionProgress"]++;
   }
-
   if(isset($_SESSION['FILE']))
   {
   echo"<div class='form-group'>
@@ -168,7 +162,6 @@ function readCSV($filename)
     <input type='submit' name='newquiz' value='Enter Quiz Name' class='btn btn-primary'>
   </form></div>";
   }
-
   ?>
 
 <?php /*
