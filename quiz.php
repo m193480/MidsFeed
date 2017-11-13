@@ -101,17 +101,13 @@ function readCSV($filename)
     {
       if(isset($_POST[$i]))
       {
-        $_SESSION["points"] += $_POST[$i];
+        $_SESSION["points"] += $_POST[$i]+1;
       }
     }
   }
 
   function getFinalAnswer($points, $maxScore, $answers)
   {
-    foreach($answers as $key)
-    {
-      echo $key;
-    }
     if($points <= $maxScore/4)
     {
       return $answers[0];
@@ -139,9 +135,6 @@ function readCSV($filename)
     $answer = getFinalAnswer($_SESSION["points"], getScore(sizeof($_SESSION["data"]["quizzes"]["questions"])), $_SESSION["data"]["quizzes"]["answers"]);
     echo "<div class='jumbotron'>";
     echo "<h2 class='display-3'>Based on your answers, $answer.</h2>";
-    echo "<pre>";
-    print_r($_SESSION);
-    echo "</pre>";
     echo "</div>";
     $username = $_COOKIE['uname'] . ".csv";
     $fp = fopen($username, "a");
