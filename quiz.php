@@ -51,7 +51,8 @@ function readCSV($filename)
       }
       else
       {
-        echo "invalid input file: Blame Sean Krasovic.";
+        echo "<div class='jumbotron'>
+        </div>";
           echo"<div class='form-group'><form method='POST' action='?'>
     <label for='newquiz'>New Quiz:</label>
     <input type='submit' name='newquiz' value='Enter Quiz Name'>
@@ -69,7 +70,6 @@ function readCSV($filename)
   }
   if(isset($_POST['quizid']))
   {
-    echo $_POST['quizid'];
     $_SESSION['FILE'] = $_POST['quizid'] . ".csv";
   }
   if(isset($_POST['newquiz']))
@@ -105,10 +105,43 @@ function readCSV($filename)
       }
     }
   }
+
+  function getFinalAnswer($points, $maxScore, $answers)
+  {
+    foreach($answers as $key)
+    {
+      echo $key;
+    }
+    if($points <= $maxScore/4)
+    {
+      return $answers[0];
+    }
+    else if($points <= $maxScore/2)
+    {
+      return $answers[1];
+    }
+    else if($points <= 3*$maxScore/4)
+    {
+      return $answers[2];
+    }
+    else {
+      return $answers[3];
+    }
+  }
+
+  function getScore($numQuestions)
+  {
+    return $numQuestions * 4;
+  }
+
   if(isset($_SESSION["questionProgress"]) && $_SESSION["questionProgress"] >= sizeof($_SESSION["data"]["quizzes"]["questions"]))
   {
+    $answer = getFinalAnswer($_SESSION["points"], getScore(sizeof($_SESSION["data"]["quizzes"]["questions"])), $_SESSION["data"]["quizzes"]["answers"]);
     echo "<div class='jumbotron'>";
-    echo "<h2 class='display-3'>Based on your answers, you are a gorilla.</h2>";
+    echo "<h2 class='display-3'>Based on your answers, $answer.</h2>";
+    echo "<pre>";
+    print_r($_SESSION);
+    echo "</pre>";
     echo "</div>";
     $username = $_COOKIE['uname'] . ".csv";
     $fp = fopen($username, "a");
@@ -133,7 +166,7 @@ function readCSV($filename)
     echo "</h1>";
     echo "<h2 class='display-4'>";
     echo $quizData['desc'];
-    echo "</h2> <hr class='my-4'";
+    echo "</h2> <hr class='my-4'>";
     $questionNumber = $_SESSION["questionProgress"];
     echo "<p class='lead'>";
     echo $quizData["questions"][$questionNumber]["question"];
@@ -168,7 +201,7 @@ function readCSV($filename)
 
   <footer class="py-5 bg-dark">
 <div class="container">
-	<p class="m-0 text-center text-white">Copyright &copy; Collective Effort Without Sean Krasovic 2017</p>
+	<p class="m-0 text-center text-white">Copyright &copy; Lil "Gucci Gang" Pump 2017</p>
 </div>
 <!-- /.container -->
 </footer>
