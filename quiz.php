@@ -138,7 +138,7 @@ function readCSV($filename)
     echo "</div>";
     $username = $_COOKIE['uname'] . ".csv";
     $fp = fopen($username, "a");
-    $output = array($_SESSION["data"]["quizzes"]["name"], "dude is a gorilla");
+    $output = array($_SESSION["data"]["quizzes"]["name"], $answer);
     fputcsv($fp,$output, "|");
     session_unset();
   }
@@ -198,10 +198,4 @@ function readCSV($filename)
 </div>
 <!-- /.container -->
 </footer>
-
-<?php /*
-    echo "<pre>";
-    print_r($_SESSION["data"]);
-    echo "</pre>"; */
-?>
 </html>
