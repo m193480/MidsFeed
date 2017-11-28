@@ -3,6 +3,12 @@ body {
     padding-top: 65px;
 }
 </style>
+<script type='text/javascript'>
+function remCookie(){
+	document.cookie = "uname=''; expires=Wed, 01 Jan 1970 00:00:00 UTC; path=''";
+	return true;
+}
+</script>
 <?php
 echo   "
   <!-- Bootstrap core CSS -->
@@ -29,22 +35,30 @@ echo   "
                 <span class='sr-only'>(current)</span>
               </a>
             </li>
-            ";}
+            <li class='nav-item active'>
+              <a class='nav-link' href='index.php' onClick='return remCookie()'>Sign Out
+                <span class='sr-only'>(current)</span>
+              </a>
+            </li>";
+          }
             echo "
             <li class='nav-item'>
               <a class='nav-link' href='quiz.php'>Take A Quiz</a>
             </li>
             <li class='nav-item'>
               <a class='nav-link' href='QuizForm.php'>Create A Quiz</a>
-            </li>
-            <li class='nav-item'>
+            </li>";
+            if(!isset($_COOKIE["uname"])){
+            echo "<li class='nav-item'>
               <a class='nav-link' href='signIn.php'>Sign In</a>
             </li>
             <li class='nav-item'>
               <a class='nav-link' href='signUp.php'>Sign Up</a>
-            </li>
+            </li>";
+          }
+          echo "
           </ul>
         </div>
       </div>
-    </nav>";
+		</nav>";
 ?>
