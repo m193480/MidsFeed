@@ -51,11 +51,11 @@ function readCSV($filename)
       }
       else
       {
-        echo "<div class='jumbotron'>
+        echo "<div class='jumbotron'><h1 class='display-4'>Error: Quiz does not exist!</h1>
         </div>";
           echo"<div class='form-group'><form method='POST' action='?'>
     <label for='newquiz'>New Quiz:</label>
-    <input type='submit' name='newquiz' value='Enter Quiz Name'>
+    <input type='submit' name='newquiz' value='Enter Quiz Name' class='btn btn-primary'>
   </form></div>";
         exit(1);
       }
@@ -94,6 +94,11 @@ function readCSV($filename)
     $_SESSION["data"] = readCSV($_SESSION["FILE"]);
     $_SESSION["questionProgress"] = 0;
     $_SESSION["points"] = 0;
+  }
+
+  if(isset($_POST['back']))
+  {
+    $_SESSION["questionProgress"]-=2;
   }
   if(isset($_POST))
   {
@@ -140,7 +145,9 @@ function readCSV($filename)
     $fp = fopen($username, "a");
     $output = array($_SESSION["data"]["quizzes"]["name"], $answer);
     fputcsv($fp,$output, "|");
+    $fname = $_SESSION['FILE'];
     session_unset();
+    $_SESSION['FILE'] = $fname;
   }
   else
   {
@@ -167,19 +174,30 @@ function readCSV($filename)
     echo "Here are your options:";
     echo "</p>";
     $j = 0;
+    echo "<table style='margin:1em auto;'>";
     foreach($quizData["questions"][$questionNumber]["options"] as $key => $option)
     {
+      echo "<tr><td>";
       echo "<input type='radio' name='$questionNumber' value='$j'> $option";
-      echo "<br>";
+      echo "</td></tr>";
       $j++;
     }
-    echo "</select></div>";
+    echo "</table>";
+    echo "</div>";
     echo "<input type=submit value='Submit Answer' class='btn btn-primary'>";
   echo "</form></div>";
   $_SESSION["questionProgress"]++;
   }
   if(isset($_SESSION['FILE']))
   {
+    if($_SESSION["questionProgress"]>1)
+    {
+    echo "<div class='form-group'>
+    <form method='POST' action='?'>
+      <label for='back'>Go back!</label>
+      <input type='submit' name='back' value='Go Back One Question' class='btn btn-primary'>
+    </form></div>";
+  }
   echo"<div class='form-group'>
   <form method='POST' action='?'>
     <label for='unsset'>Restart Quiz Progress:</label>
