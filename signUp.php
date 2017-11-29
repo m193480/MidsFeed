@@ -48,8 +48,11 @@ require_once("navbar.php");
           fputcsv($file,$list,'|');
           fclose($file);
           $name = $_POST['cuname'] . '.csv';
-          $user = fopen($name,'x');
+          $profile = $_POST['cuname'] . 'Profile.csv';
+					$user = fopen($name,'x');
+					$uProf = fopen($profile,'x');
           fclose($user);
+          fclose($uProf);
           $expires = time() + 86400;
           setcookie("uname", $_POST['cuname'], $expires);
 
