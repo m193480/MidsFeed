@@ -178,7 +178,12 @@ function readCSV($filename)
     foreach($quizData["questions"][$questionNumber]["options"] as $key => $option)
     {
       echo "<tr><td>";
-      echo "<input type='radio' name='$questionNumber' value='$j'> $option";
+      echo "<input type='radio' name='$questionNumber' value='$j'";
+      if($j == 0)
+      {
+        echo "checked='checked'";
+      }
+      echo "> $option";
       echo "</td></tr>";
       $j++;
     }
