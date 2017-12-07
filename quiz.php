@@ -3,7 +3,13 @@
 <?php
   require_once("navbar.php");
 ?>
-
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="AJAX LAB">
+  <meta name="keywords" content="HTML">
+  <meta name="author" content="MIDN J. R. ROGERS">
+  <title>Take A Quiz</title>
+</head>
 </style>
 <?php
 /*
