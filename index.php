@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>1 Col Portfolio - Start Bootstrap Template</title>
+    <title>MidsFeed - Home</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -37,16 +36,21 @@
       <!-- Project One -->
       <div class="row">
         <div class="col-md-7">
-          <a href="#">
+          <a href="http://midn.cs.usna.edu/~m193480/IT350/MidsFeed/quiz.php">
             <img class="img-fluid rounded mb-3 mb-md-0" src="img/carrier.jpg" alt="">
           </a>
         </div>
         <div class="col-md-5">
-          <h3>Name of Quiz</h3>
+          <h3>What is the best song of 2017?</h3>
           <p>
-            Quiz Description
+            <?php
+            $fp = fopen("What is the best song of 2017?.csv", 'r');
+            $quiz = fgetcsv($fp,0,'|');
+            echo $quiz[1];
+            fclose($fp);
+            ?>
           </p>
-          <a class="btn btn-primary" href="#">Take Quiz!</a>
+          <a class="btn btn-primary" href="http://midn.cs.usna.edu/~m193480/IT350/MidsFeed/quiz.php">Take Quiz!</a>
         </div>
       </div>
       <!-- /.row -->
@@ -56,16 +60,21 @@
       <!-- Project Two -->
       <div class="row">
         <div class="col-md-7">
-          <a href="#">
+          <a href="http://midn.cs.usna.edu/~m193480/IT350/MidsFeed/quiz.php">
             <img class="img-fluid rounded mb-3 mb-md-0" src="img/h3usn.jpg" alt="">
           </a>
         </div>
         <div class="col-md-5">
-          <h3>Name of Quiz</h3>
+          <h3>What company do you belong in?</h3>
           <p>
-            Quiz Description
+            <?php
+            $fp = fopen("What company do you belong in?.csv", 'r');
+            $quiz = fgetcsv($fp,0,'|');
+            echo $quiz[1];
+            fclose($fp);
+            ?>
           </p>
-          <a class="btn btn-primary" href="#">Take Quiz</a>
+          <a class="btn btn-primary" href="http://midn.cs.usna.edu/~m193480/IT350/MidsFeed/quiz.php">Take Quiz</a>
         </div>
       </div>
       <!-- /.row -->
@@ -75,16 +84,21 @@
       <!-- Project Three -->
       <div class="row">
         <div class="col-md-7">
-          <a href="#">
+          <a href="http://midn.cs.usna.edu/~m193480/IT350/MidsFeed/quiz.php">
             <img class="img-fluid rounded mb-3 mb-md-0" src="img/seals.jpg" alt="">
           </a>
         </div>
         <div class="col-md-5">
-          <h3>Name of Quiz</h3>
+          <h3>What kind of hat are you?</h3>
           <p>
-            Quiz Description
+            <?php
+            $fp = fopen("What kind of hat are you?.csv", 'r');
+            $quiz = fgetcsv($fp,0,'|');
+            echo $quiz[1];
+            fclose($fp);
+            ?>
           </p>
-          <a class="btn btn-primary" href="#">Take Quiz</a>
+          <a class="btn btn-primary" href="http://midn.cs.usna.edu/~m193480/IT350/MidsFeed/quiz.php">Take Quiz</a>
         </div>
       </div>
       <!-- /.row -->
@@ -95,16 +109,21 @@
       <div class="row">
 
         <div class="col-md-7">
-          <a href="#">
+          <a href="http://midn.cs.usna.edu/~m193480/IT350/MidsFeed/quiz.php">
             <img class="img-fluid rounded mb-3 mb-md-0" src="img/VirginiaSSN.PNG" alt="">
           </a>
         </div>
         <div class="col-md-5">
-          <h3>Quiz Name</h3>
+          <h3>Are you cool?</h3>
           <p>
-            Quiz Description
+            <?php
+            $fp = fopen("Are you cool?.csv", 'r');
+            $quiz = fgetcsv($fp,0,'|');
+            echo $quiz[1];
+            fclose($fp);
+            ?>
           </p>
-          <a class="btn btn-primary" href="#">Take Quiz</a>
+          <a class="btn btn-primary" href="http://midn.cs.usna.edu/~m193480/IT350/MidsFeed/quiz.php">Take Quiz</a>
         </div>
       </div>
       <!-- /.row -->
