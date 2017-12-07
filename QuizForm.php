@@ -1,3 +1,4 @@
+<!-- Author: Sean Krasovic-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +26,7 @@
   <form method="POST" action="?">
     <?php
     session_start();
-
+    //if you have not input a quiz name start from the beginning
     if(!isset($_SESSION['i']) || (!isset($_POST['name']) && !isset($_SESSION['name']))) {
       $_SESSION['i'] = 0;
       echo "<div class = 'container'><table> <tr><td>";
@@ -37,6 +38,7 @@
       }
       echo "<tr><td colspan = '2'><input type='submit' class='btn btn-default' value='Name Submit' /></td></tr></table></div>";
     }else {
+      //if you are done with your quiz go to the quiz taking page
       if($_SESSION['i'] >= 10 || isset($_POST['done'])) {
         session_destroy();
         header('Location:./quiz.php');
@@ -46,6 +48,9 @@
         $name = $_SESSION['name'] . '.csv';
         $out = fopen($name,'x');
         fputcsv($out,array($_SESSION['name'],$_POST['desc'],$_POST['answer'][0],$_POST['answer'][1],$_POST['answer'][2],$_POST['answer'][3]), '|');
+        fclose($out);
+        $out = fopen('list.csv','a');
+        fputcsv($out, array($_POST['name']));
         fclose($out);
       } else {
         $name = $_SESSION['name'] . '.csv';
@@ -59,7 +64,6 @@
         array_push($array, $_POST['questions'][$index]['option'][2]);
         array_push($array, $_POST['questions'][$index]['option'][3]);
         fputcsv($out, $array, '|');
-
         fclose($out);
       }
       $i = $_SESSION['i'] + 1;
