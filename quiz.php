@@ -5,7 +5,7 @@
 ?>
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="Quiz">
+  <meta name="description" content="Take Quiz">
   <meta name="keywords" content="HTML">
   <meta name="author" content="MIDN J. R. ROGERS">
   <title>Take A Quiz</title>
@@ -94,9 +94,12 @@ function readCSV($filename)
     echo "<input type='text' class='form-control' name='quizid' id='quiz'></div>";
     echo "<input type=submit name='FILE' value='Take Quiz!' class='btn btn-primary'>";
     echo "</form></div>";
+
     $listOfQuizzesLoc = "list.csv";
+
     if($fp = fopen($listOfQuizzesLoc, "r"))
     {
+      echo "<div class='container'>";
       echo "<div class='jumbotron'>";
       echo "<h1 style='text-align:center;'>Available Quizzes</h1>";
       echo "<ul class='list-group' style='text-align:center;'>";
@@ -104,7 +107,7 @@ function readCSV($filename)
       {
         echo "<li class='list-group-item' onclick=\"document.getElementById('quiz').value='$quizName[0]';\">$quizName[0]</li>";
       }
-      echo "</div>";
+      echo "</div></div>";
     }
   }
   else if(isset($_SESSION["FILE"]) && !isset($_SESSION["questionProgress"]))
@@ -113,6 +116,7 @@ function readCSV($filename)
     $_SESSION["questionProgress"] = 0;
     $_SESSION["points"] = 0;
   }
+
   if(isset($_POST['back']))
   {
     $_SESSION["questionProgress"]-=2;
@@ -127,6 +131,7 @@ function readCSV($filename)
       }
     }
   }
+
   function getFinalAnswer($points, $maxScore, $answers)
   {
     if($points <= $maxScore/4)
@@ -145,10 +150,12 @@ function readCSV($filename)
       return $answers[3];
     }
   }
+
   function getScore($numQuestions)
   {
     return $numQuestions * 4;
   }
+
   if(isset($_SESSION["questionProgress"]) && $_SESSION["questionProgress"] >= sizeof($_SESSION["data"]["quizzes"]["questions"]))
   {
     $answer = getFinalAnswer($_SESSION["points"], getScore(sizeof($_SESSION["data"]["quizzes"]["questions"])), $_SESSION["data"]["quizzes"]["answers"]);
@@ -230,6 +237,7 @@ function readCSV($filename)
   ?>
 
   <script type="text/javascript">
+
   function goForm(formElement, id) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -241,6 +249,7 @@ function readCSV($filename)
     xhttp.send(new FormData (formElement));
     return false;
   }
+
   </script>
 
   <footer class="py-5 bg-dark">
