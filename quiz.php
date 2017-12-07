@@ -88,6 +88,20 @@ function readCSV($filename)
     echo "<input type='text' class='form-control' name='quizid' id='quiz'></div>";
     echo "<input type=submit name='FILE' value='Take Quiz!' class='btn btn-primary'>";
     echo "</form></div>";
+
+    $listOfQuizzesLoc = "list.csv";
+
+    if($fp = fopen($listOfQuizzesLoc, "r"))
+    {
+      echo "<div class='jumbotron'>";
+      echo "<h1 style='text-align:center;'>Available Quizzes</h1>";
+      echo "<ul class='list-group' style='text-align:center;'>";
+      while($quizName = fgetcsv($fp))
+      {
+        echo "<li class='list-group-item' onclick=\"document.getElementById('quiz').value='$quizName[0]';\">$quizName[0]</li>";
+      }
+      echo "</div>";
+    }
   }
   else if(isset($_SESSION["FILE"]) && !isset($_SESSION["questionProgress"]))
   {
@@ -202,18 +216,34 @@ function readCSV($filename)
       <label for='back'>Go back!</label>
       <input type='submit' name='back' value='Go Back One Question' class='btn btn-primary'>
     </form></div>";
+    echo"<div class='form-group'>
+    <form method='POST' action='?'>
+      <label for='unsset'>Restart Quiz Progress:</label>
+      <input type='submit' name='unsset' value='RESTART' class='btn btn-primary'>
+    </form></div>";
   }
-  echo"<div class='form-group'>
-  <form method='POST' action='?'>
-    <label for='unsset'>Restart Quiz Progress:</label>
-    <input type='submit' name='unsset' value='RESTART' class='btn btn-primary'>
-  </form></div>";
   echo"<div class='form-group'><form method='POST' action='?'>
     <label for='newquiz'>New Quiz:</label>
     <input type='submit' name='newquiz' value='Enter Quiz Name' class='btn btn-primary'>
   </form></div>";
   }
   ?>
+
+  <script type="text/javascript">
+
+  function goForm(formElement, id) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+         document.getElementById(id).innerHTML = xhttp.responseText;
+      }
+    };
+    xhttp.open(formElement.method, formElement.action, true);
+    xhttp.send(new FormData (formElement));
+    return false;
+  }
+
+  </script>
 
   <footer class="py-5 bg-dark">
 <div class="container">
