@@ -150,12 +150,6 @@
           <a class="page-link" href="#">1</a>
         </li>
         <li class="page-item">
-          <a class="page-link" href="#">2</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">3</a>
-        </li>
-        <li class="page-item">
           <a class="page-link" href="#" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
             <span class="sr-only">Next</span>
@@ -169,7 +163,7 @@
     <!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; JR 2017</p>
+        <p class="m-0 text-center text-white">Copyright &copy; Not JR 2017</p>
       </div>
       <!-- /.container -->
     </footer>
