@@ -21,14 +21,14 @@ require_once("navbar.php");
 
     <center><h1>MidsFeed Sign Up</h1></center>
 
-    <form method='post' action='?'>
+    <form method='post' action='?' onsubmit="return validate();">
 
     <div class="container">
       <label><b>Username</b></label>
-      <input type="text" placeholder="Create Username" class="form-control" name="cuname" required>
+      <input type="text" placeholder="Create Username" class="form-control" id = "cuname" name="cuname" required>
 
       <label><b>Password</b></label>
-      <input type="password" placeholder="Create Password" class="form-control" name="cpsw" required>
+      <input type="password" placeholder="Create Password" class="form-control" id = "cpsw" name="cpsw" required>
 
       <?php
       $cuname = $_POST['cuname'];
@@ -36,7 +36,7 @@ require_once("navbar.php");
       $list = array($cuname,$cpsw);
       ?>
       <br />
-      <button type="submit" class="btn btn-primary" onclick="validate()">Sign up!</button>
+      <button type="submit" class="btn btn-primary">Sign up!</button>
       <br />
       <br />
 
@@ -65,5 +65,23 @@ require_once("navbar.php");
 
       </div>
     </form>
+    <script type="text/javascript">
+      function validate() {
+        var sin = document.getElementById('cuname').value;
+        var sout = document.getElementById('cpsw').value;
+        var value = true;
+        if(sin.includes("<") || sin.includes(">") || sin.includes("\'") || sin.includes("\"")) {
+          document.getElementById('cuname').value = "";
+          value = false;
+        }
+        if(sout.includes("<") || sout.includes(">") || sout.includes("\'") || sout.includes("\"")){
+          document.getElementById('cpsw').value = "";
+          value = false;
+        }
+
+        return value;
+
+      }
+    </script>
   </body>
   </html>
