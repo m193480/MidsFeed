@@ -19,6 +19,7 @@
 	</head>
 
 	<body>
+
 <?php
 if(isset($_COOKIE['uname'])){
 	$uname = $_COOKIE['uname'];
@@ -33,36 +34,18 @@ require_once("navbar.php");
 <div class="container">
 
 <div class="row">
-	<div class="col-md-2">
-		<img class="img-fluid rounded mb-3 mb-md-0" src="img/egg.png" alt"">
-	</div>
 	<div class="col-md-10">
 		<h1 class=":my-2">
 			<?php
-				echo $uname;
+				echo "edit $uname page";
 			?>
 		</h1>
-		<a href="edit.php">Edit Profile</a>
 	</div>
 </div>
-<?php
-$file = $uname . ".csv";
-$fp = fopen($file,"r");
-while($quiz = fgetcsv($fp,0,'|')){
-echo "
-<div class='row'>
-	<div class='col-md-12'>
-		<h1> Quiz Results </h1>
-	</div>
-</div>
-<div class='row'>
-	<div class='col-md-12'>
-		<h3> Quiz: $quiz[0]</h3>
-		<p> Results: $quiz[1] </p>
-	</div>
-</div>";
-} ?>
-
+<form action="updatePage.php" method="post">
+	<textarea name="bio" cols="50" rows="10"></textarea>
+	<input type="Submit" value ="Submit Changes">
+</form>
 
 <!-- Footer -->
 <footer class="py-5 bg-dark">

@@ -40,8 +40,23 @@ require_once("navbar.php");
 		<h1 class=":my-2">
 			<?php
 				echo $uname;
-			?>
+				$profile = $uname . "Profile.csv";
+				$p = fopen($profile,"r");
+				while($bio = fgetcsv($p,0,'|')){
+				echo "
+				<div class='row'>
+					<div class='col-md-12'>
+						<h1> About </h1>
+					</div>
+				</div>
+				<div class='row'>
+					<div class='col-md-12'>
+						<p> Results: {$bio[0]} </p>
+					</div>
+				</div>";
+			}?>
 		</h1>
+		<a href="edit.php">Edit Profile</a>
 	</div>
 </div>
 <?php
@@ -56,11 +71,13 @@ echo "
 </div>
 <div class='row'>
 	<div class='col-md-12'>
-		<h3> Quiz: $quiz[0]</h3>
-		<p> Results: $quiz[1] </p>
+		<h3> Quiz: {$quiz[0]}</h3>
+		<p> Results: {$quiz[1]} </p>
 	</div>
 </div>";
 } ?>
+
+
 <!-- Footer -->
 <footer class="py-5 bg-dark">
 <div class="container">
