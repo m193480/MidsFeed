@@ -227,7 +227,7 @@ function readCSV($filename)
   }
   if(isset($_SESSION['FILE']))
   {
-    if($_SESSION["questionProgress"]>1)
+    if($_SESSION["questionProgress"]>0)
     {
     echo "<div class='form-group'>
     <form method='POST' action='?'>
