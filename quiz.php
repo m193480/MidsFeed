@@ -74,8 +74,18 @@ function readCSV($filename)
     session_unset();
     $_SESSION['FILE'] = $saveValue;
   }
+  if(isset($_POST[$_SESSION["questionProgress"]]))
+  {
+    $_SESSION["questionProgress"]++;
+  }
+  if(isset($_POST['back']))
+  {
+    $_SESSION["questionProgress"]--;
+  }
   if(isset($_POST['quizid']))
   {
+    session_destroy();
+    session_start();
     $_SESSION['FILE'] = $_POST['quizid'] . ".csv";
   }
   if(isset($_POST['newquiz']))
@@ -115,11 +125,6 @@ function readCSV($filename)
     $_SESSION["data"] = readCSV($_SESSION["FILE"]);
     $_SESSION["questionProgress"] = 0;
     $_SESSION["points"] = 0;
-  }
-
-  if(isset($_POST['back']))
-  {
-    $_SESSION["questionProgress"]-=2;
   }
   if(isset($_POST))
   {
@@ -212,7 +217,6 @@ function readCSV($filename)
     echo "</div>";
     echo "<input type=submit value='Submit Answer' class='btn btn-primary'>";
   echo "</form></div>";
-  $_SESSION["questionProgress"]++;
   }
   if(isset($_SESSION['FILE']))
   {
