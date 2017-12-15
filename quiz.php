@@ -62,7 +62,7 @@ function readCSV($filename)
         </div>";
           echo"<div class='form-group'><form method='POST' action='?'>
     <label for='newquiz'>New Quiz:</label>
-    <input type='submit' name='newquiz' value='Enter Quiz Name' class='btn btn-primary'>
+    <input type='submit' name='beginnewquiz' value='Enter Quiz Name' class='btn btn-primary'>
   </form></div>";
         exit(1);
       }
@@ -82,6 +82,11 @@ function readCSV($filename)
   if(isset($_POST['back']))
   {
     $_SESSION["questionProgress"]--;
+  }
+  if(isset($_POST['beginnewquiz']) && $_POST['beginnewquiz'] == "Enter Quiz Name")
+  {
+    session_destroy();
+    session_start();
   }
   if(isset($_POST['quizid']))
   {
@@ -237,7 +242,7 @@ function readCSV($filename)
   }
   echo"<div class='form-group'><form method='POST' action='?'>
     <label for='newquiz'>New Quiz:</label>
-    <input type='submit' name='newquiz' value='Enter Quiz Name' class='btn btn-primary'>
+    <input type='submit' name='beginnewquiz' value='Enter Quiz Name' class='btn btn-primary'>
   </form></div>";
   }
   ?>
