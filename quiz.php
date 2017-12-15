@@ -1,8 +1,4 @@
 <html>
-
-<?php
-  require_once("navbar.php");
-?>
 <head>
   <meta charset="utf-8">
   <meta name="description" content="Take Quiz">
@@ -11,6 +7,11 @@
   <title>Take A Quiz</title>
 </head>
 </style>
+<body>
+ <?php
+    require_once("navbar.php");
+ ?>
+
 <?php
 /*
 Current functionality: Read a given quiz from a file and write to the current user's .csv file storing quiz results.
@@ -88,9 +89,10 @@ function readCSV($filename)
     session_start();
     $_SESSION['FILE'] = $_POST['quizid'] . ".csv";
   }
-  if(isset($_POST['newquiz']))
+  if(isset($_GET['name']) && $_GET['name'] == "newquiz")
   {
-    session_unset();
+    session_destroy();
+    session_start();
   }
   ?>
 
@@ -255,7 +257,7 @@ function readCSV($filename)
   }
 
   </script>
-
+</body>
   <footer class="py-5 bg-dark">
 <div class="container">
 	<p class="m-0 text-center text-white">Copyright &copy; Lil "Gucci Gang" Pump 2017</p>

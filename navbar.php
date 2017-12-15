@@ -43,7 +43,7 @@ echo   "
           }
             echo "
             <li class='nav-item'>
-              <a class='nav-link' href='quiz.php'>Take A Quiz</a>
+              <a class='nav-link' href='quiz.php?name=newquiz'>Take A Quiz</a>
             </li>
             <li class='nav-item'>
               <a class='nav-link' href='QuizForm.php'>Create A Quiz</a>
