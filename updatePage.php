@@ -5,11 +5,15 @@ if(isset($_COOKIE['uname'])){
 
 $file = $uname . "Profile.csv";
 if(isset($_POST["bio"])){
+  $fp = fopen($file,"r");
+  $bio = fgetcsv($fp);
+  $pic = fgetcsv($fp);
+  fclose($fp);
   $fp = fopen($file,"w");
-  $data = fgetcsv($fp,0,'|');
-   $data[0] = $_POST["bio"];
-   fputcsv($fp,$data,"|");
-   fclose();
+  $bio[0] = $_POST["bio"];
+  fputcsv($fp,$bio);
+  fputcsv($fp,$pic);
+  fclose($fp);
 }
 require_once("profile.php");
 ?>

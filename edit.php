@@ -37,7 +37,7 @@ require_once("navbar.php");
 	<div class="col-md-10">
 		<h1 class=":my-2">
 			<?php
-				echo "edit $uname page";
+				echo "Edit $uname's page";
 			?>
 		</h1>
 	</div>
@@ -45,6 +45,13 @@ require_once("navbar.php");
 <form action="updatePage.php" method="post">
 	<textarea name="bio" cols="50" rows="10"></textarea>
 	<input type="Submit" value ="Submit Changes">
+</form>
+
+
+<form action="upload.php" method="post" enctype="multipart/form-data">
+    Select image to upload:
+    <input type="file" name="fileToUpload" id="fileToUpload">
+    <input type="submit" value="Upload Image" name="submit">
 </form>
 
 <!-- Footer -->
