@@ -12,7 +12,6 @@
 
   <!-- Custom styles for this template -->
   <link href="css/1-col-portfolio.css" rel="stylesheet">
-  <link rel="icon" href="http://midn.cs.usna.edu/~m193480/IT350/MidsFeed/img/logo.png">
 
 </head>
 <?php
@@ -44,7 +43,13 @@ require_once("navbar.php");
 
       <?php
       if(isset($_POST['cuname']) && isset($_POST['cpsw'])){
-        if($_POST['cuname'] != '' && $_POST['cpsw'] != '' ) {
+        if(strpos($_POST['cuname'], '<') !== false || strpos($_POST['cuname'], '>') !== false || strpos($_POST['cuname'], '\'') !== false || strpos($_POST['cuname'], "\"") !== false) {
+
+        }
+        else if(strpos($_POST['cpsw'], '<') !== false || strpos($_POST['cpsw'], '>') !== false || strpos($_POST['cpsw'], '\'') !== false || strpos($_POST['cpsw'], "\"") !== false) {
+
+        }
+        else if($_POST['cuname'] != '' && $_POST['cpsw'] != '' ) {
           $file = fopen("usernames.csv","a");
           fputcsv($file,$list,'|');
           fclose($file);
