@@ -13,6 +13,7 @@
 
   <!-- Custom styles for this template -->
   <link href="css/1-col-portfolio.css" rel="stylesheet">
+  <link rel="icon" href="http://midn.cs.usna.edu/~m193480/IT350/MidsFeed/img/logo.png">
 
 </head>
 

@@ -9,6 +9,7 @@ function remCookie(){
 	return true;
 }
 </script>
+<link rel="icon" href="http://midn.cs.usna.edu/~m193480/IT350/MidsFeed/img/logo.png">
 <?php
 echo   "
   <!-- Bootstrap core CSS -->
