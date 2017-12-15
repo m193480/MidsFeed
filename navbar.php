@@ -9,6 +9,7 @@ function remCookie(){
 	return true;
 }
 </script>
+<link rel="icon" href="http://midn.cs.usna.edu/~m193480/IT350/MidsFeed/img/logo.png">
 <?php
 echo   "
   <!-- Bootstrap core CSS -->
@@ -43,7 +44,7 @@ echo   "
           }
             echo "
             <li class='nav-item'>
-              <a class='nav-link' href='quiz.php'>Take A Quiz</a>
+              <a class='nav-link' href='quiz.php?name=newquiz'>Take A Quiz</a>
             </li>
             <li class='nav-item'>
               <a class='nav-link' href='QuizForm.php'>Create A Quiz</a>

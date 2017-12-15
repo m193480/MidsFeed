@@ -36,9 +36,9 @@
       <!-- Project One -->
       <div class="row">
         <div class="col-md-7">
-          <a href="http://midn.cs.usna.edu/~m193480/IT350/MidsFeed/quiz.php">
-            <img class="img-fluid rounded mb-3 mb-md-0" src="img/carrier.jpg" alt="">
-          </a>
+          <form action="quiz.php" method="POST">
+            <button name="quizid" value="What is the best song of 2017?"><img class="img-fluid rounded mb-3 mb-md-0" src="img/carrier.jpg" alt=""></button>
+          </form>
         </div>
         <div class="col-md-5">
           <h3>What is the best song of 2017?</h3>
@@ -50,7 +50,9 @@
             fclose($fp);
             ?>
           </p>
-          <a class="btn btn-primary" href="http://midn.cs.usna.edu/~m193480/IT350/MidsFeed/quiz.php">Take Quiz!</a>
+          <form action="quiz.php" method="POST">
+            <button class="btn btn-primary" name="quizid" value="What is the best song of 2017?">Take Quiz!</button>
+          </form>
         </div>
       </div>
       <!-- /.row -->
@@ -60,9 +62,9 @@
       <!-- Project Two -->
       <div class="row">
         <div class="col-md-7">
-          <a href="http://midn.cs.usna.edu/~m193480/IT350/MidsFeed/quiz.php">
-            <img class="img-fluid rounded mb-3 mb-md-0" src="img/h3usn.jpg" alt="">
-          </a>
+          <form action="quiz.php" method="POST">
+            <button name="quizid" value="What company do you belong in?"><img class="img-fluid rounded mb-3 mb-md-0" src="img/h3usn.jpg" alt=""></button>
+          </form>
         </div>
         <div class="col-md-5">
           <h3>What company do you belong in?</h3>
@@ -74,7 +76,9 @@
             fclose($fp);
             ?>
           </p>
-          <a class="btn btn-primary" href="http://midn.cs.usna.edu/~m193480/IT350/MidsFeed/quiz.php">Take Quiz</a>
+          <form action="quiz.php" method="POST">
+            <button class="btn btn-primary" name="quizid" value="What company do you belong in?">Take Quiz!</button>
+          </form>
         </div>
       </div>
       <!-- /.row -->
@@ -84,9 +88,9 @@
       <!-- Project Three -->
       <div class="row">
         <div class="col-md-7">
-          <a href="http://midn.cs.usna.edu/~m193480/IT350/MidsFeed/quiz.php">
-            <img class="img-fluid rounded mb-3 mb-md-0" src="img/seals.jpg" alt="">
-          </a>
+          <form action="quiz.php" method="POST">
+            <button name="quizid" value="What kind of hat are you?"><img class="img-fluid rounded mb-3 mb-md-0" src="img/seals.jpg" alt=""></button>
+          </form>
         </div>
         <div class="col-md-5">
           <h3>What kind of hat are you?</h3>
@@ -98,7 +102,9 @@
             fclose($fp);
             ?>
           </p>
-          <a class="btn btn-primary" href="http://midn.cs.usna.edu/~m193480/IT350/MidsFeed/quiz.php">Take Quiz</a>
+          <form action="quiz.php" method="POST">
+            <button class="btn btn-primary" name="quizid" value="What kind of hat are you?">Take Quiz!</button>
+          </form>
         </div>
       </div>
       <!-- /.row -->
@@ -109,9 +115,9 @@
       <div class="row">
 
         <div class="col-md-7">
-          <a href="http://midn.cs.usna.edu/~m193480/IT350/MidsFeed/quiz.php">
-            <img class="img-fluid rounded mb-3 mb-md-0" src="img/VirginiaSSN.PNG" alt="">
-          </a>
+          <form action="quiz.php" method="POST">
+            <button name="quizid" value="Are you cool?"><img class="img-fluid rounded mb-3 mb-md-0" src="img/VirginiaSSN.PNG" alt=""></button>
+          </form>
         </div>
         <div class="col-md-5">
           <h3>Are you cool?</h3>
@@ -123,7 +129,9 @@
             fclose($fp);
             ?>
           </p>
-          <a class="btn btn-primary" href="http://midn.cs.usna.edu/~m193480/IT350/MidsFeed/quiz.php">Take Quiz</a>
+          <form action="quiz.php" method="POST">
+            <button class="btn btn-primary" name="quizid" value="Are you cool?">Take Quiz!</button>
+          </form>
         </div>
       </div>
       <!-- /.row -->
@@ -161,7 +169,7 @@
     <!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Not Jon Rogers 2017</p>
+        <p class="m-0 text-center text-white">Copyright &copy; JR 2017</p>
       </div>
       <!-- /.container -->
     </footer>
